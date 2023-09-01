@@ -8,10 +8,71 @@
     --alive: #54CB44; /* color personaje vivo */
     --unknown: #9E9E9E; /* color personaje desconocido */
     --dead: #D63D2E; /* color personaje 💀 */
-    --font: -apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'; /* fuente principal */
+    --font: '-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'; /* fuente principal */
+}
+
+body{
+    font-family: var(--font);
+    color: var(--primary-font-color);
 }
 
 .character-list {
     /* ejemplo de uso de variables con css */
     background-color: var(--character-list-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.character {
+    display: flex;
+    background-color: var(--character-color);
+    width: 480px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.contenido{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.name{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.circle{
+    display: flex;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+.alive{
+    background-color: var(--alive);
+}
+.dead{
+    background-color: var(--dead);
+}
+.unknown{
+    background-color: var(--unknown);
+}
+
+.imagen img{
+    width: 200px;
+}
+
+.lastknown{
+    color: var(--secondary-font-color);
+}
+
+.status{
+    display: flex;
+    align-items: center;
 }

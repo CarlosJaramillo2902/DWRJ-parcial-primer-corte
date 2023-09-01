@@ -1,39 +1,61 @@
 import RickAndMortyService from './service';
 
-
-// acá deberás crear una instancia del servicio RickAndMortyService
-// const service = new RickAndMortyService();
-
-// esta función debe encargarse de obtener el elemento contenedor
-// y agregar los personajes obtenidos por el API, deberás llamar tu función getAllCharacters
-// iterar el arreglo de personajes y llamar a la función createCharacterCard para agregar cada personaje
-// a el contenedor puedes usar la propiedad innerHTML para esto
+const service = new RickAndMortyService();
 
 // valor (1 punto)
 
-function createCharacterList() {
-    // llamar primero createCharacterCard(character);
-    // llamar segundo addCharacterListeners(character);
+async function createCharacterList() {
+    const tarjetas = await service.getAllCharacters();
+    const lista = document.querySelector(".character-list")
+    let contenido = "";
+    for (let i = 0; i < 20; i++) {
+        contenido += createCharacterCard(tarjetas[i]);
+    }
+    lista.innerHTML = contenido;
+    const tarjs = document.querySelectorAll(".character")
+    await tarjs.forEach(carta =>{
+        addCharacterListeners(carta,carta.querySelector('span:nth-child(2)').textContent);
+    })
 }
-
-// esta función debe devolver la estructura html en string de tu personaje ejemplo
-
-// `<div class="character">
-//      <span>${gender}</span>
-//      <span>${name}</span>
-// </div>`;
-
-// deberás usar los elementos correctos de HTML para poder visualizar el personaje
 
 // valor (1 punto) HTML
 
-function createCharacterCard(character) {}
+function createCharacterCard(character) {
+    let estado = "alive";
+    if(character.status=="Dead"){
+        estado = "dead";
+    }
+    else if(character.status=="unknown"){
+        estado = "unknown"
+    }
+    const tarjeta = `<div class="character">
+                        <div class="imagen">
+                            <img src="${character.image}">
+                        </div>
+                        <div class="contenido">
+                            <div class="texto">
+                                <div class="name">${character.name}</div>
+                                <div class="status"><div class="circle ${estado}"></div><div>${character.status} - ${character.species}</div></div>
+                            </div>
+                            <div class="texto">
+                                <div class="lastknown">Last known location:</div>
+                                <div class="location">${character.location}</div>
+                            </div>
+                            <div class="texto">
+                                <div class="lastknown">First seen in:</div>
+                                <div class="firstSeen">${character.firstSeen}</div>
+                            </div>
+                        </div>
+                    </div>`;
+    return tarjeta;
+}
 
-// esta función deberá obtener todos los personajes y deberá agregarles un evento de click
-// cuando se seleccione un personaje debe decir hola soy 'nombre personaje', recuerda que puedes obtener
-// el elemento target de un evento y así obtener sus propiedades
 
-function addCharacterListeners(character) {}
+function addCharacterListeners(carta, name) {
+    carta.addEventListener("click", () => {
+        alert(`Hola soy ${name}`);
+    })
+}
 
 
 // por último se llama la función y se renderiza la vista
