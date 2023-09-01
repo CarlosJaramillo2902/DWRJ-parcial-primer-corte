@@ -14,6 +14,7 @@
 body{
     font-family: var(--font);
     color: var(--primary-font-color);
+    margin: 0;
 }
 
 .character-list {
